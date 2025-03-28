@@ -8,19 +8,16 @@ import { SiteFooter } from "@/components/site-footer"
 
 const inter = Inter({ subsets: ["latin"] })
 
-export const metadata: Metadata = {
-  title: "Wasserwacht Großmehring",
-  description: "Website der Wasserwacht Großmehring",
-}
 
 export default function RootLayout({
+  
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
     <html lang="de" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={inter.className}suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <div className="flex min-h-screen flex-col">
             <SiteHeader />
