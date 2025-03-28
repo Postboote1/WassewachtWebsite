@@ -1,17 +1,17 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
+### Install required dependencies
+`npm install framer-motion lucide-react zustand @radix-ui/react-dropdown-menu @radix-ui/react-tabs @radix-ui/react-accordion @radix-ui/react-dialog @radix-ui/react-slot tailwindcss-animate`
+Install shadcn/ui components
+`npx shadcn@latest init`
+Then install the required components:
+`npx shadcn@latest add button card avatar badge accordion dialog dropdown-menu input label select tabs textarea switch separator`
 
 First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
