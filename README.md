@@ -3,13 +3,16 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ## Getting Started
 ### Install required dependencies
 ```bash
-npm install framer-motion lucide-react zustand @radix-ui/react-dropdown-menu @radix-ui/react-tabs @radix-ui/react-accordion @radix-ui/react-dialog @radix-ui/react-slot tailwindcss-animate```
+npm install framer-motion lucide-react zustand @radix-ui/react-dropdown-menu @radix-ui/react-tabs @radix-ui/react-accordion @radix-ui/react-dialog @radix-ui/react-slot tailwindcss-animate
+```
 Install shadcn/ui components
 ```bash
-npx shadcn@latest init```
+npx shadcn@latest init
+```
 Then install the required components:
 ```bash
-npx shadcn@latest add button card avatar badge accordion dialog dropdown-menu input label select tabs textarea switch separator```
+npx shadcn@latest add button card avatar badge accordion dialog dropdown-menu input label select tabs textarea switch separator
+```
 
 First, run the development server:
 
