@@ -1,103 +1,218 @@
-import Image from "next/image";
+"use client"
+
+import Link from "next/link"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { ChevronRight, Facebook, Instagram, Menu, ChevronDown } from "lucide-react"
+import { HeroSection } from "@/components/hero-section"
+import { FeaturedPosts } from "@/components/featured-posts"
+import { useState } from "react"
+import { MainSections } from "@/components/main-sections"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { MobileNav } from "@/components/mobile-nav"
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [mobileNavOpen, setMobileNavOpen] = useState(false)
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <div className="flex min-h-screen flex-col">
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-16 items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2">
+              <Image
+                src="/logo.svg"
+                alt="Wasserwacht Großmehring Logo"
+                width={40}
+                height={40}
+                className="h-10 w-auto"
+              />
+              <span className="hidden font-bold sm:inline-block">Wasserwacht Großmehring</span>
+            </Link>
+          </div>
+          <nav className="hidden md:flex items-center gap-6">
+            <Link href="/neuigkeiten" className="text-sm font-medium hover:text-primary">
+              Neuigkeiten
+            </Link>
+            <Link href="/ausruestung" className="text-sm font-medium hover:text-primary">
+              Ausrüstung
+            </Link>
+            <Link href="/aufgabenbereiche" className="text-sm font-medium hover:text-primary">
+              Aufgabenbereiche
+            </Link>
+            <Link href="/einsaetze" className="text-sm font-medium hover:text-primary">
+              Einsätze
+            </Link>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium hover:text-primary">
+                Über uns <ChevronDown className="h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>
+                  <Link href="/ueber-uns/vorstandschaft" className="w-full">
+                    Vorstandschaft
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/ueber-uns/gruendung" className="w-full">
+                    Gründung
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/ueber-uns/mitglied-werden" className="w-full">
+                    Mitglied werden
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/ueber-uns/impressum" className="w-full">
+                    Impressum
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </nav>
+          <div className="flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-4">
+              <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                <Facebook className="h-5 w-5 text-muted-foreground hover:text-primary" />
+              </Link>
+              <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                <Instagram className="h-5 w-5 text-muted-foreground hover:text-primary" />
+              </Link>
+              <Link href="/login">
+                <Button variant="outline" size="sm">
+                  Login
+                </Button>
+              </Link>
+            </div>
+            <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileNavOpen(true)}>
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Toggle menu</span>
+            </Button>
+          </div>
         </div>
+      </header>
+      {mobileNavOpen && <MobileNav onClose={() => setMobileNavOpen(false)} />}
+      <main className="flex-1">
+        <HeroSection />
+        <section className="container py-12 md:py-24 lg:py-32">
+          <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
+            <h2 className="font-bold text-3xl leading-[1.1] sm:text-3xl md:text-5xl">Wasserwacht Großmehring</h2>
+            <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
+              Wir sind ehrenamtlich im Wasserrettungsdienst tätig und sorgen für Sicherheit an Gewässern in unserer
+              Region.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/ueber-uns">
+                <Button>
+                  Mehr über uns
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="/aktuelles">
+                <Button variant="outline">Aktuelle Meldungen</Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+        <MainSections />
+        <FeaturedPosts />
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      <footer className="border-t bg-muted/40">
+        <div className="container flex flex-col gap-8 py-8 md:py-12 lg:py-16">
+          <div className="flex flex-col gap-4 md:flex-row md:justify-between md:gap-8">
+            <div className="space-y-4">
+              <Link href="/" className="flex items-center gap-2">
+                <Image
+                  src="/logo.svg"
+                  alt="Wasserwacht Großmehring Logo"
+                  width={40}
+                  height={40}
+                  className="h-10 w-auto"
+                />
+                <span className="font-bold">Wasserwacht Großmehring</span>
+              </Link>
+              <p className="text-sm text-muted-foreground max-w-xs">
+                Ehrenamtlich im Wasserrettungsdienst tätig für die Sicherheit an Gewässern in unserer Region.
+              </p>
+              <div className="flex gap-4">
+                <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                  <Facebook className="h-5 w-5 text-muted-foreground hover:text-primary" />
+                </Link>
+                <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                  <Instagram className="h-5 w-5 text-muted-foreground hover:text-primary" />
+                </Link>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+              <div className="space-y-3">
+                <h3 className="text-sm font-medium">Bereiche</h3>
+                <ul className="space-y-2 text-sm">
+                  <li>
+                    <Link href="/wasserrettung" className="text-muted-foreground hover:text-foreground">
+                      Wasserrettung
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/jugendarbeit" className="text-muted-foreground hover:text-foreground">
+                      Jugendarbeit
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/helfer-vor-ort" className="text-muted-foreground hover:text-foreground">
+                      Helfer vor Ort
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div className="space-y-3">
+                <h3 className="text-sm font-medium">Dienste</h3>
+                <ul className="space-y-2 text-sm">
+                  <li>
+                    <Link href="/sanitaetsdienste" className="text-muted-foreground hover:text-foreground">
+                      Sanitätsdienste
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/wachstation" className="text-muted-foreground hover:text-foreground">
+                      Wachstation
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/aktuelles" className="text-muted-foreground hover:text-foreground">
+                      Aktuelles
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div className="space-y-3">
+                <h3 className="text-sm font-medium">Kontakt</h3>
+                <ul className="space-y-2 text-sm">
+                  <li>
+                    <Link href="/ueber-uns" className="text-muted-foreground hover:text-foreground">
+                      Über uns
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/kontakt" className="text-muted-foreground hover:text-foreground">
+                      Kontakt
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/impressum" className="text-muted-foreground hover:text-foreground">
+                      Impressum
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="text-center text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Wasserwacht Großmehring. Alle Rechte vorbehalten.
+          </div>
+        </div>
       </footer>
     </div>
-  );
+  )
 }
+
